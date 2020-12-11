@@ -13,3 +13,5 @@ const PostComp = (props) => {
         {backgroundColor: { ...moodColor }}
     }></div>
 }
+
+export default PostComp;
