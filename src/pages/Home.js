@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PostModel from '../models/post';
 import ColorModel from '../models/color';
 import PostComp from '../components/PostComp';
+import MoodCreate from '../components/MoodCreate';
+//import MoodEdit from '../components/MoodEdit';
 
 class Home extends Component {
   state = {
@@ -19,6 +21,10 @@ class Home extends Component {
 
     const allUserPosts = await PostModel.all();
     this.setState({ userPosts: allUserPosts })
+  }
+
+  handleClick() {
+
   }
 
   render(){
@@ -53,6 +59,14 @@ class Home extends Component {
             { this.state.posts ? allPostList : 'Loading...'}
           </section>
         </section>
+
+        <a className="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i className="material-icons">add</i></a>
+
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <MoodCreate />
+          </div>
+        </div>
       </article>
     )
   }
