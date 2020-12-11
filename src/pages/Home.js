@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PostModel from '../models/post';
 import ColorModel from '../models/color';
+import PostComp from '../components/PostComp';
 
 class Home extends Component {
   state = {
-    posts = [],
-    userPosts = [],
+    posts: [],
+    userPosts: []
   }
 
   componentDidMount() {
@@ -14,10 +15,10 @@ class Home extends Component {
 
   fetchData = async () => {
     const allPosts = await PostModel.all();
-    this.setState({ posts = allPosts });
+    this.setState({ posts: allPosts });
 
     const allUserPosts = await PostModel.all();
-    this.setState({ userPosts = allUserPosts })
+    this.setState({ userPosts: allUserPosts })
   }
 
   render(){
@@ -33,21 +34,22 @@ class Home extends Component {
       )
     })
 
+    //in case of empty state or while loading
     const noUserPostList = () => {
-      return <p>To save your mood as a color, press the button below.</p>
+      return <p>To save your mood, press the button below.</p>
     }
 
     return (
-      <article>
-        <section>
+      <article className="gridy">
+        <section className="gridy">
           <h1>Your moods</h1>
-          <section>
+          <section className="flexy">
             { this.state.userPosts ? userPostList : noUserPostList }
           </section>
         </section>
-        <section>
+        <section className="gridy">
           <h1>Everyone's moods</h1>
-          <section>
+          <section className="flexy">
             { this.state.posts ? allPostList : 'Loading...'}
           </section>
         </section>
