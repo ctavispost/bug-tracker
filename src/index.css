@@ -65,7 +65,7 @@ p {
 }
 
 .add-btn {
-  position: absolute;
+  position: sticky;
   bottom: 100px;
   text-align: center;
   margin: auto;

@@ -1,9 +1,28 @@
 import React from 'react';
 import Mood from './Mood';
 
-const MoodCreate = () => {
+const MoodCreate = (props) => {
     return (
-        <p>Test</p>
+        <section>
+            <h4>How are you?</h4>
+            <section className="flexy">
+                <button>
+                    <i class="material-icons">sentiment_very_satisfied</i>
+                </button>
+                <button>
+                    <i class="material-icons">sentiment_satisfied</i>    
+                </button>
+                <button>
+                    <i class="material-icons">sentiment_neutral</i>
+                </button>
+                <button>
+                    <i class="material-icons">seniment_dissatisfied</i>    
+                </button>
+                <button>
+                    <i class="material-icons">sentiment_very_dissatisfied</i>
+                </button>
+            </section>
+        </section>
     )
 }
 

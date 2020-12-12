@@ -34,6 +34,7 @@ class PostModel {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify(postInfo)
         })
             .then(res => res.json());

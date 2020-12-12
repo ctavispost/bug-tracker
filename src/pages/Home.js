@@ -3,7 +3,7 @@ import PostModel from '../models/post';
 import ColorModel from '../models/color';
 import PostComp from '../components/PostComp';
 import MoodCreate from '../components/MoodCreate';
-//import MoodEdit from '../components/MoodEdit';
+import MoodEdit from '../components/MoodEdit';
 
 class Home extends Component {
   state = {
@@ -17,24 +17,24 @@ class Home extends Component {
 
   fetchData = async () => {
     const allPosts = await PostModel.all();
+    console.log(allPosts);
     this.setState({ posts: allPosts });
 
     const allUserPosts = await PostModel.all();
+    console.log(allUserPosts)
     this.setState({ userPosts: allUserPosts })
   }
 
-  handleClick() {
-
-  }
-
   render(){
-    const allPostList = this.state.userPosts.map((post, index) => {
+    const allPostList = this.state.userPosts.posts.map((post, index) => {
       return (
-        <PostComp {...post}/>
+        <a className="modal-trigger" href="modal2">
+          <PostComp {...post}/>
+        </a>
       )
     })
 
-    const userPostList = this.state.posts.map((post, index) => {
+    const userPostList = this.state.posts.posts.map((post, index) => {
       return (
         <PostComp {...post}/>
       )
@@ -60,11 +60,17 @@ class Home extends Component {
           </section>
         </section>
 
-        <a className="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i className="material-icons">add</i></a>
+        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1"><i className="material-icons">add</i></a>
 
-        <div id="modal1" class="modal">
-          <div class="modal-content">
+        <div id="modal1" className="modal">
+          <div className="modal-content">
             <MoodCreate />
+          </div>
+        </div>
+
+        <div id="modal2" className="modal">
+          <div className="modal-content">
+            <MoodEdit />
           </div>
         </div>
       </article>
