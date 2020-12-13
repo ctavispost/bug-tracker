@@ -1,29 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Mood from './Mood';
+import PostModel from '../components/post';
 
-const MoodCreate = (props) => {
-    return (
-        <section>
-            <h4>How are you?</h4>
-            <section className="flexy">
-                <button>
-                    <i class="material-icons">sentiment_very_satisfied</i>
-                </button>
-                <button>
-                    <i class="material-icons">sentiment_satisfied</i>    
-                </button>
-                <button>
-                    <i class="material-icons">sentiment_neutral</i>
-                </button>
-                <button>
-                    <i class="material-icons">seniment_dissatisfied</i>    
-                </button>
-                <button>
-                    <i class="material-icons">sentiment_very_dissatisfied</i>
-                </button>
+class MoodCreate extends Component {
+    state = {
+        colorId: null
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const newPost = {
+            colorId: this.state.colorId
+        };
+
+        this.props.onSubmit(await PostModel.create(newPost));
+    }
+
+    render() {
+        return (
+            <section>
+                <h4>How are you?</h4>
+                <section className="flexy">
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="number" defaultValue="1" value={this.state.colorId} style={{display: "none"}}></input>
+                        <button type="submit" value="Submit">
+                            <i class="material-icons orange">sentiment_very_satisfied</i>
+                        </button>
+                    </form>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="number" defaultValue="2" value={this.state.colorId} style={{display: "none"}}></input>
+                        <button type="submit" value="Submit">
+                            <i class="material-icons green">sentiment_satisfied</i>
+                        </button>
+                    </form>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="number" defaultValue="3" value={this.state.colorId} style={{display: "none"}}></input>
+                        <button type="submit" value="Submit">
+                            <i class="material-icons purple">sentiment_neutral</i>
+                        </button>
+                    </form>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="number" defaultValue="4" value={this.state.colorId} style={{display: "none"}}></input>
+                        <button type="submit" value="Submit">
+                            <i class="material-icons blue">seniment_dissatisfied</i>
+                        </button>
+                    </form>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="number" defaultValue="5" value={this.state.colorId} style={{display: "none"}}></input>
+                        <button type="submit" value="Submit">
+                            <i class="material-icons grey">sentiment_very_dissatisfied</i>
+                        </button>
+                    </form>
+                </section>
             </section>
-        </section>
-    )
+        )    
+    };
 }
 
 export default MoodCreate;

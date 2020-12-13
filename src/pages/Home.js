@@ -16,27 +16,42 @@ class Home extends Component {
   };
 
   fetchData = async () => {
-    const allPosts = await PostModel.all();
+    const allPosts = await PostModel.all().posts;
     console.log(allPosts);
     this.setState({ posts: allPosts });
 
-    const allUserPosts = await PostModel.all();
-    console.log(allUserPosts)
-    this.setState({ userPosts: allUserPosts })
+    const allUserPosts = await PostModel.all().posts;
+    if (allUserPosts.length > 0) {
+      this.setState({ userPosts: allUserPosts })
+    }
+  }
+
+  handleCreate = () => {
+    const elems = document.getElementById('#modal1');
+    const instances = M.Modal.init(elems, options);
+  }
+
+  handleEdit = () => {
+    const elems = document.getElementById('#modal2');
+    const instances = M.Modal.init(elems, options);
+  }
+
+  addNewPost = (post) => {
+    this.setState({posts: [...this.state.posts, post]});
   }
 
   render(){
-    const allPostList = this.state.userPosts.posts.map((post, index) => {
-      return (
-        <a className="modal-trigger" href="modal2">
-          <PostComp {...post}/>
-        </a>
-      )
-    })
-
-    const userPostList = this.state.posts.posts.map((post, index) => {
+    const allPostList = this.state.posts.map((post, index) => {
       return (
         <PostComp {...post}/>
+      )
+    })
+    
+    const userPostList = this.state.userPosts.map((post, index) => {
+      return (
+        <a className="modal-trigger" href="modal2" onClick={() => this.handleEdit()}>
+          <PostComp {...post}/>
+        </a>
       )
     })
 
@@ -60,11 +75,11 @@ class Home extends Component {
           </section>
         </section>
 
-        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1"><i className="material-icons">add</i></a>
+        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={() => this.handleCreate()}><i className="material-icons">add</i></a>
 
         <div id="modal1" className="modal">
           <div className="modal-content">
-            <MoodCreate />
+            <MoodCreate onSubmit={post => this.newPost(post)}/>
           </div>
         </div>
 
