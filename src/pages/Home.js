@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import M from 'materialize-css';
 import PostModel from '../models/post';
 import ColorModel from '../models/color';
 import PostComp from '../components/PostComp';
@@ -28,12 +29,12 @@ class Home extends Component {
 
   handleCreate = () => {
     const elems = document.getElementById('#modal1');
-    const instances = M.Modal.init(elems, options);
+    const instances = M.Modal.init(elems);
   }
 
   handleEdit = () => {
     const elems = document.getElementById('#modal2');
-    const instances = M.Modal.init(elems, options);
+    const instances = M.Modal.init(elems);
   }
 
   addNewPost = (post) => {
