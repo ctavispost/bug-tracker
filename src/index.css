@@ -70,3 +70,23 @@ p {
   text-align: center;
   margin: auto;
 }
+
+.orange {
+  color: #EC8813;
+}
+
+.green {
+  color: #57A345;
+}
+
+.purple {
+  color: #882BA7;
+}
+
+.blue {
+  color: #4087F1;
+}
+
+.grey {
+  color: #949494;
+}
