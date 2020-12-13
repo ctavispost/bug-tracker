@@ -22,7 +22,7 @@ class Home extends Component {
 
     const allUserPosts = await PostModel.all().posts;
     if (allUserPosts.length > 0) {
-      this.setState({ userPosts: allUserPosts })
+      this.setState({ userPosts: allUserPosts });
     }
   }
 
@@ -38,6 +38,7 @@ class Home extends Component {
 
   addNewPost = (post) => {
     this.setState({posts: [...this.state.posts, post]});
+    this.setState({userPosts: [...this.state.userPosts, post]});
   }
 
   render(){
