@@ -7,19 +7,19 @@ const MoodCreate = (props) => {
             <h4>How are you?</h4>
             <section className="flexy">
                 <button>
-                    <i class="material-icons">sentiment_very_satisfied</i>
+                    <i className="material-icons">sentiment_very_satisfied</i>
                 </button>
                 <button>
-                    <i class="material-icons">sentiment_satisfied</i>    
+                    <i className="material-icons">sentiment_satisfied</i>    
                 </button>
                 <button>
-                    <i class="material-icons">sentiment_neutral</i>
+                    <i className="material-icons">sentiment_neutral</i>
                 </button>
                 <button>
-                    <i class="material-icons">seniment_dissatisfied</i>    
+                    <i className="material-icons">seniment_dissatisfied</i>    
                 </button>
                 <button>
-                    <i class="material-icons">sentiment_very_dissatisfied</i>
+                    <i className="material-icons">sentiment_very_dissatisfied</i>
                 </button>
             </section>
         </section>

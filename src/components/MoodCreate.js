@@ -25,31 +25,31 @@ class MoodCreate extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <input type="number" defaultValue="1" style={{display: "none"}}></input>
                         <button type="submit" value="Submit">
-                            <i class="material-icons orange">sentiment_very_satisfied</i>
+                            <i className="material-icons orange">sentiment_very_satisfied</i>
                         </button>
                     </form>
                     <form onSubmit={this.handleSubmit}>
                         <input type="number" defaultValue="2" style={{display: "none"}}></input>
                         <button type="submit" value="Submit">
-                            <i class="material-icons green">sentiment_satisfied</i>
+                            <i className="material-icons green">sentiment_satisfied</i>
                         </button>
                     </form>
                     <form onSubmit={this.handleSubmit}>
                         <input type="number" defaultValue="3" style={{display: "none"}}></input>
                         <button type="submit" value="Submit">
-                            <i class="material-icons purple">sentiment_neutral</i>
+                            <i className="material-icons purple">sentiment_neutral</i>
                         </button>
                     </form>
                     <form onSubmit={this.handleSubmit}>
                         <input type="number" defaultValue="4" style={{display: "none"}}></input>
                         <button type="submit" value="Submit">
-                            <i class="material-icons blue">seniment_dissatisfied</i>
+                            <i className="material-icons blue">seniment_dissatisfied</i>
                         </button>
                     </form>
                     <form onSubmit={this.handleSubmit}>
                         <input type="number" defaultValue="5" style={{display: "none"}}></input>
                         <button type="submit" value="Submit">
-                            <i class="material-icons grey">sentiment_very_dissatisfied</i>
+                            <i className="material-icons grey">sentiment_very_dissatisfied</i>
                         </button>
                     </form>
                 </section>
