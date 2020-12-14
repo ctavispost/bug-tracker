@@ -9,47 +9,42 @@ import ColorModel from '../models/color';
 class Home extends Component {
   state = {
     posts: [],
-    userPosts: []
+    userPosts: [],
+    show1: false,
+    show2: false
   }
 
   componentDidMount() {
     this.fetchData();
   };
 
+  //get all posts, all of current user's posts, and set colors for them, then set state
   fetchData = async () => {
     const allPosts = (await PostModel.all()).posts;
-    console.log(allPosts);
-
     const allUserPosts = (await PostModel.all()).posts;
-
     for (let p of allPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
     }
-
     for (let p of allUserPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
     }
-
     this.setState({ posts: allPosts, userPosts: allUserPosts });
   }
 
-
-
-
-  handleCreate = () => {
+  handleCreate = (e) => {
+    this.setState({ show1: true });
     const elems = document.getElementById('#modal1');
-    const instances = M.Modal.init(elems);
-  }
+    
+  };
 
   handleEdit = () => {
     const elems = document.getElementById('#modal2');
     const instances = M.Modal.init(elems);
-  }
+  };
 
-  addNewPost = (post) => {
-    this.setState({posts: [...this.state.posts, post]});
-    this.setState({userPosts: [...this.state.userPosts, post]});
-  }
+  newPost = (post) => {
+    this.setState({ posts: [...this.state.posts, post], userPosts: [...this.state.userPosts, post], show1: false });
+  };
 
   render(){
     const allPostList = this.state.posts.map((post, index) => {
@@ -91,14 +86,10 @@ class Home extends Component {
           </section>
         </section>
 
-        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={() => this.handleCreate()}><i className="material-icons">add</i></a>
+        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate()}><i className="material-icons">add</i></a>
 
-        <div id="modal1" className="modal">
-          <div className="modal-content">
-            <MoodCreate onSubmit={post => this.newPost(post)}/>
-          </div>
-        </div>
-
+        <MoodCreate onSubmit={post => this.newPost(post)} show={this.state.show1}/>
+        
         <div id="modal2" className="modal">
           <div className="modal-content">
             <MoodEdit />
