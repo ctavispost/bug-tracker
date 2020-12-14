@@ -4,6 +4,7 @@ import PostModel from '../models/post';
 import PostComp from '../components/PostComp';
 import MoodCreate from '../components/MoodCreate';
 import MoodEdit from '../components/MoodEdit';
+import ColorModel from '../models/color';
 
 class Home extends Component {
   state = {
@@ -13,18 +14,27 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchData();
-    console.log(this.state.posts);
   };
 
   fetchData = async () => {
     const allPosts = (await PostModel.all()).posts;
-    this.setState({ posts: allPosts });
+    console.log(allPosts);
 
     const allUserPosts = (await PostModel.all()).posts;
-    if (allUserPosts.length > 0) {
-      this.setState({ userPosts: allUserPosts });
+
+    for (let p of allPosts) {
+      p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
     }
+
+    for (let p of allUserPosts) {
+      p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
+    }
+
+    this.setState({ posts: allPosts, userPosts: allUserPosts });
   }
+
+
+
 
   handleCreate = () => {
     const elems = document.getElementById('#modal1');
@@ -45,8 +55,8 @@ class Home extends Component {
     const allPostList = this.state.posts.map((post, index) => {
       return (
         <PostComp {...post} key={ post.id }/>
-      )
-    })
+      );
+    });
     
     const userPostList = () =>{
       if (this.state.userPosts.length > 0) {
