@@ -1,5 +1,5 @@
 import React from 'react';
-import Mood from './Mood';
+
 
 const MoodCreate = (props) => {
     return (

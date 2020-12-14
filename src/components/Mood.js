@@ -1,5 +1,5 @@
 import React from 'react';
-import ColorModel from '../models/color';
+
 
 const Mood = () => {
     return(

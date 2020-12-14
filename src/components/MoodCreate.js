@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Mood from './Mood';
 import PostModel from '../models/post';
 
 class MoodCreate extends Component {
