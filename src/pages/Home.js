@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import M from 'materialize-css';
 import PostModel from '../models/post';
-import ColorModel from '../models/color';
 import PostComp from '../components/PostComp';
 import MoodCreate from '../components/MoodCreate';
 import MoodEdit from '../components/MoodEdit';
@@ -17,11 +16,11 @@ class Home extends Component {
   };
 
   fetchData = async () => {
-    const allPosts = await PostModel.all().posts;
+    const allPosts = (await PostModel.all()).posts;
     console.log(allPosts);
     this.setState({ posts: allPosts });
 
-    const allUserPosts = await PostModel.all().posts;
+    const allUserPosts = (await PostModel.all()).posts;
     if (allUserPosts.length > 0) {
       this.setState({ userPosts: allUserPosts });
     }
@@ -45,29 +44,34 @@ class Home extends Component {
   render(){
     const allPostList = this.state.posts.map((post, index) => {
       return (
-        <PostComp {...post}/>
+        <PostComp {...post} index={ post.id }/>
       )
     })
     
-    const userPostList = this.state.userPosts.map((post, index) => {
-      return (
-        <a className="modal-trigger" href="modal2" onClick={() => this.handleEdit()}>
-          <PostComp {...post}/>
-        </a>
-      )
-    })
+    const userPostList = () =>{
+      if (this.state.userPosts.length > 0) {
+        this.state.userPosts.map((post, index) => {
+          return (
+            <a className="modal-trigger" href="modal2" onClick={() => this.handleEdit()}>
+              <PostComp {...post} index={ post.id }/>
+            </a>
+          )
+        })  
+      } else {
+        return <p>No posts found.</p>
+      }
+    }
+      
 
     //in case of empty state or while loading
-    const noUserPostList = () => {
-      return <p>To save your mood, press the button below.</p>
-    }
+    const noUserPostList = (<p>To save your mood, press the button below.</p>);
 
     return (
       <article className="gridy">
         <section className="gridy">
           <h1>Your moods</h1>
           <section className="flexy">
-            { this.state.userPosts ? userPostList : noUserPostList }
+            { this.state.userPosts ? userPostList() : noUserPostList }
           </section>
         </section>
         <section className="gridy">
