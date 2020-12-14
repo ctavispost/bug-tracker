@@ -53,6 +53,7 @@ p {
 .flexy {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .gridy {
@@ -62,6 +63,14 @@ p {
 .moodSquare {
   padding: 1.5rem;
   margin: 0.5rem;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 900px) {
+  .moodSquare {
+    padding: 2.5rem;
+    margin: 0.1rem;
+  }
 }
 
 .add-btn {
