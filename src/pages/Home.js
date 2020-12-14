@@ -12,12 +12,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
+    console.log(this.state.posts);
   };
 
   fetchData = async () => {
     const allPosts = (await PostModel.all()).posts;
-    console.log(allPosts);
     this.setState({ posts: allPosts });
 
     const allUserPosts = (await PostModel.all()).posts;
@@ -44,7 +44,7 @@ class Home extends Component {
   render(){
     const allPostList = this.state.posts.map((post, index) => {
       return (
-        <PostComp {...post} index={ post.id }/>
+        <PostComp {...post} key={ post.id }/>
       )
     })
     
@@ -53,7 +53,7 @@ class Home extends Component {
         this.state.userPosts.map((post, index) => {
           return (
             <a className="modal-trigger" href="modal2" onClick={() => this.handleEdit()}>
-              <PostComp {...post} index={ post.id }/>
+              <PostComp {...post} key={ post.id }/>
             </a>
           )
         })  
