@@ -35,7 +35,7 @@ const Login = props => {
   if (props.currentUser) return <Redirect to='/profile' />
 
   return (
-    <div>
+    <div className="gridy just-center marg-one-rem max-width-md">
       <h4>Login</h4>
       <form onSubmit={ handleSubmit }>
         <div className="form-group">

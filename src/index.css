@@ -99,3 +99,16 @@ p {
 .grey {
   color: #949494;
 }
+
+.just-center {
+  justify-content: center;
+  justify-items: center;
+}
+
+.marg-two-rem {
+  margin: 2rem;
+}
+
+.max-width-md {
+  max-width: 40ch;
+}
