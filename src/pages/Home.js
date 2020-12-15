@@ -70,13 +70,13 @@ class Home extends Component {
     return (
       <article className="gridy">
         <section className="gridy">
-          <h1>Your moods</h1>
+          <h1 className="just-center">Your moods</h1>
           <section className="flexy">
             { this.state.userPosts ? userPostList() : noUserPostList }
           </section>
         </section>
         <section className="gridy">
-          <h1>Everyone's moods</h1>
+          <h1 className="just-center">Everyone's moods</h1>
           <section className="flexy">
             { this.state.posts ? allPostList : 'Loading...'}
           </section>
@@ -84,7 +84,7 @@ class Home extends Component {
 
         <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate(e)}><i className="material-icons">add</i></a>
 
-        <MoodCreate onSubmit={post => this.newPost(post)} show={this.state.show1}/>
+        <MoodCreate onClick={post => this.newPost(post)} show={this.state.show1}/>
         
         <div id="modal2" className="modal">
           <div className="modal-content">
