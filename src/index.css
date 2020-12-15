@@ -44,6 +44,8 @@ a:hover {
 
 h1 {
   font-size: 2rem;
+  /* responsive font size */
+  font-size: min(max(1.25rem, 4.8vw), 2rem);
 }
 
 p {
@@ -112,6 +114,7 @@ p {
 .just-center {
   justify-content: center;
   justify-items: center;
+  text-align: center;
 }
 
 .marg-two-rem {
@@ -136,6 +139,7 @@ footer {
   max-width: 100%;
   font-size: .75rem;
   padding: 0.5rem 1rem;
+  margin-top: 5vh;
   color: #fff;
 }
 
