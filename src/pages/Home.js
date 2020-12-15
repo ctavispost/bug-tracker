@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import M from 'materialize-css';
 import PostModel from '../models/post';
 import PostComp from '../components/PostComp';
 import MoodCreate from '../components/MoodCreate';
@@ -33,13 +32,10 @@ class Home extends Component {
 
   handleCreate = (e) => {
     this.setState({ show1: true });
-    const elems = document.getElementById('#modal1');
-    
   };
 
   handleEdit = () => {
     const elems = document.getElementById('#modal2');
-    const instances = M.Modal.init(elems);
   };
 
   newPost = (post) => {
@@ -86,7 +82,7 @@ class Home extends Component {
           </section>
         </section>
 
-        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate()}><i className="material-icons">add</i></a>
+        <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate(e)}><i className="material-icons">add</i></a>
 
         <MoodCreate onSubmit={post => this.newPost(post)} show={this.state.show1}/>
         

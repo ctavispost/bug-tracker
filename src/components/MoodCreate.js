@@ -2,58 +2,64 @@ import React, { Component } from 'react';
 import PostModel from '../models/post';
 
 class MoodCreate extends Component {
-    state = {
-        colorId: null
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            colorId: null
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
 
-    handleCreateSubmit = async (event) => {
+    handleClick = async (event) => {
         event.preventDefault();
-        this.setState({colorId: event.target.dataset.value});
+        event.persist();
+        console.log("event :", event)
+        if(!Number.isNaN(event.target.dataset.value)) {
+            this.setState({colorId: event.target.dataset.value});
+        } else {
+            this.setState({colorId: event.target.parentElement.dataset.value});
+        };
+        console.log("state: ", this.state.colorId);
         const newPost = {
             colorId: this.state.colorId
         };
-        console.log(this.state.colorId);
-        console.log(newPost);
-        this.props.onSubmit(await PostModel.create(newPost));
-    }
+        console.log("new post", newPost);
+        //this.props.onSubmit(await PostModel.create(newPost));
+    }  
 
     render() {
-        if(!this.props.show){
-            return null;
-        }
+        let showBlock = {display: "none"};
+
+        if(this.props.show) {
+            showBlock = {display: "block"};
+        };
 
         return (
-            <section className="modal">
+            <section className="modal" id="modal1" style={ showBlock }>
                 <h4>How are you?</h4>
                 <section className="flexy">
-                    <form onSubmit={e => this.handleCreateSubmit(e)}>
-                        <button type="submit" value="Submit" data-value="1" className="flexy just-center align-center btn-quiet">
-                            <i className="material-icons round orange">sentiment_very_satisfied</i>
-                        </button>
-                    </form>
-                    <form onSubmit={e => this.handleCreateSubmit(e)}>
-                        <button type="submit" value="Submit" data-value="2" className="flexy just-center align-center btn-quiet">
-                            <i className="material-icons round green">sentiment_satisfied</i>
-                        </button>
-                    </form>
-                    <form onSubmit={e => this.handleCreateSubmit(e)}>
-                        <button type="submit" value="Submit" data-value="3" className="flexy just-center align-center btn-quiet">
-                            <i className="material-icons round purple">sentiment_neutral</i>
-                        </button>
-                    </form>
-                    <form onSubmit={e => this.handleCreateSubmit(e)}>
-                        <button type="submit" value="Submit" data-value="4" className="flexy just-center align-center btn-quiet">
-                            <i className="material-icons round blue">sentiment_dissatisfied</i>
-                        </button>
-                    </form>
-                    <form onSubmit={e => this.handleCreateSubmit(e)}>
-                        <button type="submit" value="Submit" data-value="5" className="flexy just-center align-center btn-quiet">
-                            <i className="material-icons round grey">sentiment_very_dissatisfied</i>
-                        </button>
-                    </form>
+                    <button onClick={this.handleClick} value="Submit" data-value="1" className="flexy just-center align-center btn-quiet">
+                        <i className="material-icons round orange">sentiment_very_satisfied</i>
+                    </button>
+                    
+                    <button onClick={this.handleClick} value="Submit" data-value="2" className="flexy just-center align-center btn-quiet">
+                        <i className="material-icons round green">sentiment_satisfied</i>
+                    </button>
+                    
+                    <button onClick={this.handleClick} value="Submit" data-value="3" className="flexy just-center align-center btn-quiet">
+                        <i className="material-icons round purple">sentiment_neutral</i>
+                    </button>
+                    
+                    <button onClick={this.handleClick} value="Submit" data-value="4" className="flexy just-center align-center btn-quiet">
+                        <i className="material-icons round blue">sentiment_dissatisfied</i>
+                    </button>
+                    
+                    <button onClick={this.handleClick} value="Submit" data-value="5" className="flexy just-center align-center btn-quiet">
+                        <i className="material-icons round grey">sentiment_very_dissatisfied</i>
+                    </button>
                 </section>
             </section>
-        )    
+        );    
     };
 }
 
