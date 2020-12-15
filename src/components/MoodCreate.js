@@ -5,18 +5,15 @@ class MoodCreate extends Component {
     constructor(props){
         super(props);
         this.state = {
-            colorId: null
+            see: this.props.show
         };
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick = async (event) => {
-        console.log("initial state: ", this.state.colorId);
         event.preventDefault();
         event.persist();
-        console.log("event :", event);
-        console.log("target data: ", event.target.dataset.value, typeof event.target.dataset.value);
-        console.log("parent data: ", event.target.parentElement.dataset.value, typeof event.target.parentElement.dataset.value);
+        
         let colorIdStr = null;
         if(event.target.dataset.value) {
             console.log("true");
@@ -24,14 +21,14 @@ class MoodCreate extends Component {
         } else {
             colorIdStr = event.target.parentElement.dataset.value;
         };
-        console.log("color str: ", colorIdStr, typeof colorIdStr);
+        
         const colorVal = parseInt(colorIdStr);
-        console.log("val: ", colorVal, typeof colorVal);
+        
         const newPost = {
             colorId: colorVal
         };
         console.log("new post", newPost);
-        //this.props.onClick(await PostModel.create(newPost));        
+        this.props.onClick(await PostModel.create(newPost));
     }  
 
     render() {
