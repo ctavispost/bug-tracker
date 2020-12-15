@@ -11,20 +11,27 @@ class MoodCreate extends Component {
     }
 
     handleClick = async (event) => {
+        console.log("initial state: ", this.state.colorId);
         event.preventDefault();
         event.persist();
-        console.log("event :", event)
-        if(!Number.isNaN(event.target.dataset.value)) {
-            this.setState({colorId: event.target.dataset.value});
+        console.log("event :", event);
+        console.log("target data: ", event.target.dataset.value, typeof event.target.dataset.value);
+        console.log("parent data: ", event.target.parentElement.dataset.value, typeof event.target.parentElement.dataset.value);
+        let colorIdStr = null;
+        if(event.target.dataset.value) {
+            console.log("true");
+            colorIdStr = event.target.dataset.value;
         } else {
-            this.setState({colorId: event.target.parentElement.dataset.value});
+            colorIdStr = event.target.parentElement.dataset.value;
         };
-        console.log("state: ", this.state.colorId);
+        console.log("color str: ", colorIdStr, typeof colorIdStr);
+        const colorVal = parseInt(colorIdStr);
+        console.log("val: ", colorVal, typeof colorVal);
         const newPost = {
-            colorId: this.state.colorId
+            colorId: colorVal
         };
         console.log("new post", newPost);
-        //this.props.onSubmit(await PostModel.create(newPost));
+        //this.props.onClick(await PostModel.create(newPost));        
     }  
 
     render() {
@@ -36,26 +43,26 @@ class MoodCreate extends Component {
 
         return (
             <section className="modal" id="modal1" style={ showBlock }>
-                <h4>How are you?</h4>
-                <section className="flexy">
-                    <button onClick={this.handleClick} value="Submit" data-value="1" className="flexy just-center align-center btn-quiet">
-                        <i className="material-icons round orange">sentiment_very_satisfied</i>
+                <h1 className="just-center pad-top marg-bot-sm">How are you?</h1>
+                <section className="flexy pad-bot">
+                    <button onClick={this.handleClick} value="Submit" data-value="1" className="flexy just-center align-center round btn-quiet">
+                        <i className="material-icons round pad-med orange">sentiment_very_satisfied</i>
                     </button>
                     
-                    <button onClick={this.handleClick} value="Submit" data-value="2" className="flexy just-center align-center btn-quiet">
-                        <i className="material-icons round green">sentiment_satisfied</i>
+                    <button onClick={this.handleClick} value="Submit" data-value="2" className="flexy just-center align-center round btn-quiet">
+                        <i className="material-icons round pad-med green">sentiment_satisfied</i>
                     </button>
                     
-                    <button onClick={this.handleClick} value="Submit" data-value="3" className="flexy just-center align-center btn-quiet">
-                        <i className="material-icons round purple">sentiment_neutral</i>
+                    <button onClick={this.handleClick} value="Submit" data-value="3" className="flexy just-center align-center round btn-quiet">
+                        <i className="material-icons round pad-med purple">sentiment_neutral</i>
                     </button>
                     
-                    <button onClick={this.handleClick} value="Submit" data-value="4" className="flexy just-center align-center btn-quiet">
-                        <i className="material-icons round blue">sentiment_dissatisfied</i>
+                    <button onClick={this.handleClick} value="Submit" data-value="4" className="flexy just-center align-center round btn-quiet">
+                        <i className="material-icons round pad-med blue">sentiment_dissatisfied</i>
                     </button>
                     
-                    <button onClick={this.handleClick} value="Submit" data-value="5" className="flexy just-center align-center btn-quiet">
-                        <i className="material-icons round grey">sentiment_very_dissatisfied</i>
+                    <button onClick={this.handleClick} value="Submit" data-value="5" className="flexy just-center align-center round btn-quiet">
+                        <i className="material-icons round pad-med grey">sentiment_very_dissatisfied</i>
                     </button>
                 </section>
             </section>
