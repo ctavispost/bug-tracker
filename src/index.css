@@ -126,10 +126,12 @@ p {
 }
 
 .btn-quiet {
-  padding: 0.5rem;
+  padding: 1px;
   border: none;
   background-color: rgba(255, 255, 255, 0.2);
 }
+
+
 
 footer {
   background-color: hsla(221.4,100%,25.9%,0.9);
@@ -151,4 +153,16 @@ footer {
   box-shadow: 
     -2rem 2rem 2rem rgba(black, 0.2);
   filter: blur(0);
+}
+
+.pad-top {
+  padding-top: 1.5rem;
+}
+
+.marg-bot-sm {
+  margin-bottom: 1rem;
+}
+
+.pad-bot {
+  padding-bottom: 1.5rem;
 }
