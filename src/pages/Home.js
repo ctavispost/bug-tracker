@@ -52,11 +52,12 @@ class Home extends Component {
     await this.fetchData();
   };
 
-  deletePost = (index) => {
+  deletePost = async (index) => {
     this.setState({
       posts: this.state.posts.filter((v, i)=> i !== index),
       userPosts: this.state.userPosts.filter((v, i)=> i !== index)
     })
+    await PostModel.destroy(index);
   }
 
   render(){
@@ -94,7 +95,7 @@ class Home extends Component {
 
         
         <MoodCreate show={this.state.show1} getOut={this.getOut}/>
-        <MoodEdit show={this.state.show2} postId={this.props.postId} getOut={this.getOut}/>
+        <MoodEdit show={this.state.show2} postId={this.props.postId} getOut={this.getOut} deletePost={this.deletePost}/>
           
       </article>
     )

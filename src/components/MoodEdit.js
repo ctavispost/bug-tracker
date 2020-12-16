@@ -7,6 +7,29 @@ class MoodEdit extends Component {
         
     }
 
+    handleClick = async (event) => {
+        event.preventDefault();
+        //event.persist();
+        
+        let colorIdStr = null;
+        if(event.target.dataset.value) {
+            console.log("true");
+            colorIdStr = event.target.dataset.value;
+        } else {
+            colorIdStr = event.target.parentElement.dataset.value;
+        };
+        
+        const colorVal = parseInt(colorIdStr);
+        const localUser = parseInt(localStorage.getItem('id'));
+        const currentPost = {
+            colorId: colorVal,
+            userId: localUser
+        };
+        
+        console.log("current post", currentPost);
+        await PostModel.update(currentPost);
+    }
+
     render() {
         let showBlock = {display: "none"};
 
@@ -61,7 +84,7 @@ class MoodEdit extends Component {
                     <button onClick={this.props.getOut}>x</button>
                 </section>
                 <div onClick={this.props.getOut} className="just-center">
-                    <button className="marg-bot-sm btn-quiet">delete</button>
+                    <button className="marg-bot-sm btn-quiet" onClick={this.props.deletePost}>delete</button>
                 </div>
             </section>
         );    
