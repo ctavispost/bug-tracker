@@ -2,35 +2,24 @@ import React, { Component } from 'react';
 import PostModel from '../models/post';
 
 class MoodEdit extends Component {
-    state = {
-        show: false
-    };
-
+    constructor(props){
+        super(props);
+        
+    }
 
     render() {
+        let showBlock = {display: "none"};
+
+        if(this.props.show) {
+            showBlock = {display: "block"};
+        };
+
         return (
-            <section className="modal" id="modal2">
-                <h4>How are you?</h4>
-                <section className="flexy">
-                    <button>
-                        <i className="material-icons">sentiment_very_satisfied</i>
-                    </button>
-                    <button>
-                        <i className="material-icons">sentiment_satisfied</i>    
-                    </button>
-                    <button>
-                        <i className="material-icons">sentiment_neutral</i>
-                    </button>
-                    <button>
-                        <i className="material-icons">seniment_dissatisfied</i>    
-                    </button>
-                    <button>
-                        <i className="material-icons">sentiment_very_dissatisfied</i>
-                    </button>
-                </section>
+            <section className="modal" id="modal1" style={ showBlock }>
+                <p>temp text</p>
             </section>
-        );
-    }
+        );    
+    };
 }
 
 export default MoodEdit;
