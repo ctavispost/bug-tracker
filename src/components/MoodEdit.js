@@ -3,7 +3,7 @@ import PostModel from '../models/post';
 
 class MoodEdit extends Component {
 
-    handleClick = async (event) => {
+    /*handleClick = async (event) => {
         event.preventDefault();
         
         let colorIdStr = null;
@@ -22,7 +22,7 @@ class MoodEdit extends Component {
         
         console.log("current post", currentPost);
         await PostModel.update(currentPost);
-    }
+    }*/
 
     render() {
         let showBlock = {display: "none"};
@@ -37,7 +37,7 @@ class MoodEdit extends Component {
                 <section className="flexy pad-bot">
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="1" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleColorChange} value="Submit" data-value="1" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med orange">sentiment_very_satisfied</i>
                             </button>
                         </div>
@@ -45,7 +45,7 @@ class MoodEdit extends Component {
                     
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="2" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleColorChange} value="Submit" data-value="2" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med green">sentiment_satisfied</i>
                             </button>
                         </div>
@@ -53,7 +53,7 @@ class MoodEdit extends Component {
                     
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="3" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleColorChange} value="Submit" data-value="3" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med purple">sentiment_neutral</i>
                             </button>
                         </div>
@@ -61,7 +61,7 @@ class MoodEdit extends Component {
 
                     <div onClick={this.props.getOut}>
                         <div>
-                        <button onClick={this.handleClick} value="Submit" data-value="4" className="flexy just-center align-center round btn-quiet">
+                        <button onClick={this.props.handleColorChange} value="Submit" data-value="4" className="flexy just-center align-center round btn-quiet">
                             <i className="material-icons round pad-med blue">sentiment_dissatisfied</i>
                         </button>
                         </div>
@@ -69,7 +69,7 @@ class MoodEdit extends Component {
 
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="5" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleColorChange} value="Submit" data-value="5" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med grey">sentiment_very_dissatisfied</i>
                             </button>
                         </div>

@@ -11,17 +11,21 @@ class Home extends Component {
     userPosts: [],
     show1: false,
     show2: false,
-    postId: ''
+    postId: '',
   }
 
   componentDidMount() {
     this.fetchData();
   };
 
-  /* //memory leak
-  componentDidUpdate() {
-    this.fetchData();
-  }*/
+  //memory leak?
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Outside if');
+    if (prevState.posts !== this.state.posts){
+      console.log('Update');
+      this.fetchData();
+    }
+  }
 
   //get all posts, filter for all of current user's posts, and set colors for each, then set state
   fetchData = async () => {
@@ -81,32 +85,37 @@ class Home extends Component {
   };
 
   openColorChange = (e) => {
+    e.preventDefault();
     this.setState({ show2: true, postId: parseInt(e.target.value) });
   };
 
   handleColorChange = async (e) => {
     e.persist();
     console.log("e: ", e);
-    let colorIdStr = '';
+    console.log("test");
+    let colorIdStr = e.target.parentElement.dataset.value;
     if(e.target.dataset.value) {
         colorIdStr = e.target.dataset.value;
     } else {
         colorIdStr = e.target.parentElement.dataset.value;
-    };  
-    console.log("color string: ", colorIdStr);
+    };
+
     const colorVal = parseInt(colorIdStr);
+    console.log(colorVal);
     const localUser = parseInt(localStorage.getItem('id'));
     const postId = this.state.postId;
     console.log("postId: ", postId);
+  
     const currentPost = {
         id: postId,
         colorId: colorVal,
         userId: localUser
     };
     const res = await PostModel.update(currentPost);
-    console.log(res);
-    res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex;
-    this.setState({ postId: '' });
+    console.log("res", res.post[0]);
+    res.colorHex = (await ColorModel.getColor(parseInt(res.post[0]))).color.hex;
+
+    this.setState({ postId: '' , userPosts: this.state.userPosts});
   };
 
   getOut = (event) => {
@@ -114,27 +123,30 @@ class Home extends Component {
   };
 
   deletePost = async () => {
+    console.log('destroy!');
     const index = this.state.postId;
+    await PostModel.destroy(index);
     this.setState({
       posts: this.state.posts.filter((v, i)=> i !== index),
       userPosts: this.state.userPosts.filter((v, i)=> i !== index),
       postId: ''
     })
-    await PostModel.destroy(index);
   }
 
   render(){
+    const userPostList = this.state.userPosts.map((post, index) => {
+      return (
+        <PostComp {...post} key={ post.id } truthy={true} openModal={e => this.openColorChange(e)}/>
+      );
+    });
+    
     const allPostList = this.state.posts.map((post, index) => {
       return (
         <PostComp {...post} key={ post.id }/>
       );
     });
     
-    const userPostList = this.state.userPosts.map((post, index) => {
-      return (
-        <PostComp {...post} key={ post.id } openModal={e => this.openColorChange(e)}/>
-      );
-    });
+    
       
     //in case of empty state or while loading
     const noUserPostList = (<p>To save your mood, press the button below.</p>);
@@ -143,13 +155,13 @@ class Home extends Component {
       <article className="gridy">
         <section className="gridy">
           <h1 className="just-center">Your moods</h1>
-          <section className="flexy flex-reverse">
+          <section className="flexy">
             { this.state.userPosts ? userPostList : noUserPostList }
           </section>
         </section>
         <section className="gridy">
           <h1 className="just-center">Everyone's moods</h1>
-          <section className="flexy flex-reverse">
+          <section className="flexy">
             { this.state.posts ? allPostList : 'Loading...'}
           </section>
         </section>
