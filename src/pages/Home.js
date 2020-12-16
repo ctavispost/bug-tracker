@@ -18,7 +18,8 @@ class Home extends Component {
     this.fetchData();
   };
 
- /* componentDidUpdate() {
+  /* //memory leak
+  componentDidUpdate() {
     this.fetchData();
   }*/
 
@@ -93,7 +94,7 @@ class Home extends Component {
 
         
         <MoodCreate show={this.state.show1} getOut={this.getOut}/>
-        <MoodEdit show={this.state.show2} postId={this.props.postId}/>
+        <MoodEdit show={this.state.show2} postId={this.props.postId} getOut={this.getOut}/>
           
       </article>
     )
