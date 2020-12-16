@@ -18,14 +18,17 @@ class Home extends Component {
     this.fetchData();
   };
 
-  componentDidUpdate() {
+ /* componentDidUpdate() {
     this.fetchData();
-  }
+  }*/
 
-  //get all posts, all of current user's posts, and set colors for them, then set state
+  //get all posts, filter for all of current user's posts, and set colors for each, then set state
   fetchData = async () => {
     const allPosts = (await PostModel.all()).posts.reverse();
-    const allUserPosts = (await PostModel.all()).posts.reverse();
+    
+    const localUser = parseInt(localStorage.getItem('id'));
+    const allUserPosts = allPosts.filter((post)=>{return post.userId = localUser});
+
     for (let p of allPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
     }
@@ -43,13 +46,9 @@ class Home extends Component {
     this.setState({ show2: true });
   };
 
-  getOut = (event) => {
-    this.setState({ show1: false });
-  };
-  
-  newPost = (event) => {
-    event.preventDefault();
-    //this.fetchData();
+  getOut = async (event) => {
+    this.setState({ show1: false, show2: false});
+    await this.fetchData();
   };
 
   deletePost = (index) => {
@@ -66,19 +65,11 @@ class Home extends Component {
       );
     });
     
-    const userPostList = () => {
-      if (this.state.userPosts.length > 0) {
-        this.state.userPosts.map((post, index) => {
-          return (
-            <a className="modal-trigger" href="#modal2" onClick={e => this.handleEdit(e)}>
-              <PostComp {...post} key={ post.id }/>
-            </a>
-          )
-        })  
-      } else {
-        return <p>No posts found.</p>
-      }
-    }
+    const userPostList = this.state.userPosts.map((post, index) => {
+      return (
+        <PostComp {...post} key={ post.id } onClick={e => this.handleEdit(e)}/>
+      );
+    });
       
     //in case of empty state or while loading
     const noUserPostList = (<p>To save your mood, press the button below.</p>);
@@ -88,7 +79,7 @@ class Home extends Component {
         <section className="gridy">
           <h1 className="just-center">Your moods</h1>
           <section className="flexy flex-reverse">
-            { this.state.userPosts ? userPostList() : noUserPostList }
+            { this.state.userPosts ? userPostList : noUserPostList }
           </section>
         </section>
         <section className="gridy">
@@ -101,7 +92,7 @@ class Home extends Component {
         <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate(e)}><i className="material-icons">add</i></a>
 
         
-        <MoodCreate newPost={this.newPost} show={this.state.show1} getOut={this.getOut}/>
+        <MoodCreate show={this.state.show1} getOut={this.getOut}/>
         <MoodEdit show={this.state.show2} postId={this.props.postId}/>
           
       </article>
