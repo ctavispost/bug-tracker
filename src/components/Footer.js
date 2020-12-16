@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer>
-      <p>Footer Here!</p>
+      <a href="/#top">back to top</a>
     </footer>
   );
 }

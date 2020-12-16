@@ -5,10 +5,10 @@ class MoodCreate extends Component {
     constructor(props){
         super(props);
         
-        this.handleClick = this.handleClick.bind(this);
+        //this.props.handleEdit = this.handleClick.bind(this);
     }
 
-    handleClick = async (event) => {
+    /*handleClick = async (event) => {
         event.preventDefault();
         //event.persist();
         
@@ -29,7 +29,7 @@ class MoodCreate extends Component {
         
         console.log("new post", newPost);
         await PostModel.create(newPost);
-    }
+    }*/
 
     render() {
         let showBlock = {display: "none"};
@@ -44,7 +44,7 @@ class MoodCreate extends Component {
                 <section className="flexy pad-bot">
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="1" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleEdit} value="Submit" data-value="1" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med orange">sentiment_very_satisfied</i>
                             </button>
                         </div>
@@ -52,7 +52,7 @@ class MoodCreate extends Component {
                     
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="2" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleEdit} value="Submit" data-value="2" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med green">sentiment_satisfied</i>
                             </button>
                         </div>
@@ -60,7 +60,7 @@ class MoodCreate extends Component {
                     
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="3" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleEdit} value="Submit" data-value="3" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med purple">sentiment_neutral</i>
                             </button>
                         </div>
@@ -68,7 +68,7 @@ class MoodCreate extends Component {
 
                     <div onClick={this.props.getOut}>
                         <div>
-                        <button onClick={this.handleClick} value="Submit" data-value="4" className="flexy just-center align-center round btn-quiet">
+                        <button onClick={this.props.handleEdit} value="Submit" data-value="4" className="flexy just-center align-center round btn-quiet">
                             <i className="material-icons round pad-med blue">sentiment_dissatisfied</i>
                         </button>
                         </div>
@@ -76,7 +76,7 @@ class MoodCreate extends Component {
 
                     <div onClick={this.props.getOut}>
                         <div>
-                            <button onClick={this.handleClick} value="Submit" data-value="5" className="flexy just-center align-center round btn-quiet">
+                            <button onClick={this.props.handleEdit} value="Submit" data-value="5" className="flexy just-center align-center round btn-quiet">
                                 <i className="material-icons round pad-med grey">sentiment_very_dissatisfied</i>
                             </button>
                         </div>

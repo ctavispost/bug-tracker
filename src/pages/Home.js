@@ -11,7 +11,7 @@ class Home extends Component {
     userPosts: [],
     show1: false,
     show2: false,
-    postId: null
+    postId: ''
   }
 
   componentDidMount() {
@@ -43,13 +43,56 @@ class Home extends Component {
     this.setState({ show1: true });
   };
 
-  handleEdit = (e) => {
-    this.setState({ show2: true });
+ /* handleClick = async (event) => {
+    event.preventDefault();
+    //event.persist();
+    
+    
+    
+    console.log("new post", newPost);
+    await PostModel.create(newPost);
+}*/
+
+  handleEdit = async (e) => {
+    e.persist();
+    console.log(e);
+    let colorIdStr = null;
+    if(e.target.dataset.value) {
+        colorIdStr = e.target.dataset.value;
+    } else {
+        colorIdStr = e.target.parentElement.dataset.value;
+    };  
+    console.log(colorIdStr);
+    const colorVal = parseInt(colorIdStr);
+    const localUser = parseInt(localStorage.getItem('id'));
+    const newPost = {
+        colorId: colorVal,
+        userId: localUser
+    };
+    console.log("new post: ", newPost);
+    //console.log(this.state.posts.length);
+    const res = await PostModel.create(newPost);
+    console.log(res);
+
+    res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex; 
+    
+    let newPosts = this.state.posts;
+    newPosts.unshift(res);
+    let newUserPosts = this.state.userPosts;
+    newUserPosts.unshift(res);
+    console.log(newPosts);
+    console.log(this.state.posts);
+      
+    this.setState({ posts: newPosts, userPosts: newUserPosts });
+    //this.setState({ show2: true, posts: newPosts, userPosts: newUserPosts });
+    console.log("new length", this.state.posts.length);
+    //console.log(this.state.posts);
+    //console.log(e.target, this.state.postId);
   };
 
-  getOut = async (event) => {
+  getOut = (event) => {
     this.setState({ show1: false, show2: false});
-    await this.fetchData();
+    //await this.fetchData();
   };
 
   deletePost = async (index) => {
@@ -94,7 +137,7 @@ class Home extends Component {
         <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate(e)}><i className="material-icons">add</i></a>
 
         
-        <MoodCreate show={this.state.show1} getOut={this.getOut}/>
+        <MoodCreate show={this.state.show1} getOut={this.getOut} handleEdit={this.handleEdit}/>
         <MoodEdit show={this.state.show2} postId={this.props.postId} getOut={this.getOut} deletePost={this.deletePost}/>
           
       </article>

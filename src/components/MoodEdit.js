@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import PostModel from '../models/post';
 
 class MoodEdit extends Component {
-    constructor(props){
-        super(props);
-        
-    }
 
     handleClick = async (event) => {
         event.preventDefault();
-        //event.persist();
         
         let colorIdStr = null;
         if(event.target.dataset.value) {
-            console.log("true");
             colorIdStr = event.target.dataset.value;
         } else {
             colorIdStr = event.target.parentElement.dataset.value;

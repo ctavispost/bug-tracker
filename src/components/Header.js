@@ -21,6 +21,7 @@ const Header = (props) => {
               <li><Link to={'/login'}>Login</Link></li>
             </>
           }
+          <li id="top" style={{display: "hidden"}}></li>
         </ul>
       </div>
     </header>

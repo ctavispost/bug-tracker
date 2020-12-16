@@ -147,6 +147,10 @@ footer {
   color: #fff;
 }
 
+footer > a {
+  color: #fff;
+}
+
 .modal {
   max-width: 40ch;
   background: white;
