@@ -28,8 +28,8 @@ class PostModel {
             .then(res => res.json());
     };
 
-    static update = (postId, postInfo) => {
-        return fetch(`${url}/post/${ postId }`, {
+    static update = (postInfo) => {
+        return fetch(`${url}/post/${ postInfo.id }`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

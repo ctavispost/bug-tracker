@@ -43,36 +43,26 @@ class Home extends Component {
     this.setState({ show1: true });
   };
 
- /* handleClick = async (event) => {
-    event.preventDefault();
-    //event.persist();
-    
-    
-    
-    console.log("new post", newPost);
-    await PostModel.create(newPost);
-}*/
-
   handleEdit = async (e) => {
     e.persist();
-    console.log(e);
-    let colorIdStr = null;
+    //console.log(e);
+    let colorIdStr = '';
     if(e.target.dataset.value) {
         colorIdStr = e.target.dataset.value;
     } else {
         colorIdStr = e.target.parentElement.dataset.value;
     };  
-    console.log(colorIdStr);
+    //console.log(colorIdStr);
     const colorVal = parseInt(colorIdStr);
     const localUser = parseInt(localStorage.getItem('id'));
     const newPost = {
         colorId: colorVal,
         userId: localUser
     };
-    console.log("new post: ", newPost);
+    //console.log("new post: ", newPost);
     //console.log(this.state.posts.length);
     const res = await PostModel.create(newPost);
-    console.log(res);
+    //console.log(res);
 
     res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex; 
     
@@ -80,8 +70,8 @@ class Home extends Component {
     newPosts.unshift(res);
     let newUserPosts = this.state.userPosts;
     newUserPosts.unshift(res);
-    console.log(newPosts);
-    console.log(this.state.posts);
+    //console.log(newPosts);
+    //console.log(this.state.posts);
       
     this.setState({ posts: newPosts, userPosts: newUserPosts });
     //this.setState({ show2: true, posts: newPosts, userPosts: newUserPosts });
@@ -90,15 +80,45 @@ class Home extends Component {
     //console.log(e.target, this.state.postId);
   };
 
-  getOut = (event) => {
-    this.setState({ show1: false, show2: false});
-    //await this.fetchData();
+  openColorChange = (e) => {
+    this.setState({ show2: true, postId: parseInt(e.target.value) });
   };
 
-  deletePost = async (index) => {
+  handleColorChange = async (e) => {
+    e.persist();
+    console.log("e: ", e);
+    let colorIdStr = '';
+    if(e.target.dataset.value) {
+        colorIdStr = e.target.dataset.value;
+    } else {
+        colorIdStr = e.target.parentElement.dataset.value;
+    };  
+    console.log("color string: ", colorIdStr);
+    const colorVal = parseInt(colorIdStr);
+    const localUser = parseInt(localStorage.getItem('id'));
+    const postId = this.state.postId;
+    console.log("postId: ", postId);
+    const currentPost = {
+        id: postId,
+        colorId: colorVal,
+        userId: localUser
+    };
+    const res = await PostModel.update(currentPost);
+    console.log(res);
+    res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex;
+    this.setState({ postId: '' });
+  };
+
+  getOut = (event) => {
+    this.setState({ show1: false, show2: false});
+  };
+
+  deletePost = async () => {
+    const index = this.state.postId;
     this.setState({
       posts: this.state.posts.filter((v, i)=> i !== index),
-      userPosts: this.state.userPosts.filter((v, i)=> i !== index)
+      userPosts: this.state.userPosts.filter((v, i)=> i !== index),
+      postId: ''
     })
     await PostModel.destroy(index);
   }
@@ -112,7 +132,7 @@ class Home extends Component {
     
     const userPostList = this.state.userPosts.map((post, index) => {
       return (
-        <PostComp {...post} key={ post.id } onClick={e => this.handleEdit(e)}/>
+        <PostComp {...post} key={ post.id } openModal={e => this.openColorChange(e)}/>
       );
     });
       
@@ -138,7 +158,7 @@ class Home extends Component {
 
         
         <MoodCreate show={this.state.show1} getOut={this.getOut} handleEdit={this.handleEdit}/>
-        <MoodEdit show={this.state.show2} postId={this.props.postId} getOut={this.getOut} deletePost={this.deletePost}/>
+        <MoodEdit show={this.state.show2} postId={this.state.postId} getOut={this.getOut} handleColorChange={this.handleColorChange} deletePost={this.deletePost}/>
           
       </article>
     )
