@@ -29,8 +29,10 @@ class Home extends Component {
     const allPosts = (await PostModel.all()).posts.reverse();
     
     const localUser = parseInt(localStorage.getItem('id'));
-    const allUserPosts = allPosts.filter((post)=>{return post.userId = localUser});
-
+    console.log(localUser);
+    const allUserPosts = allPosts.filter((post)=>{return post.userId === localUser});
+    console.log("posts: ", allPosts.length);
+    console.log("AUPs: ", allUserPosts.length);
     for (let p of allPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
     }
