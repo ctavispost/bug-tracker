@@ -29,11 +29,12 @@ Clone [the backend](https://github.com/ctavispost/moodPatch_backend) and run `np
 ## Future improvements
 
 Moodpatch will soon have:
-- Profiles which let people indicate why they are using the app
+- Profiles which let people indicate their color preferences and why they are using the app
 - Private questionaires people can use to better understand and communicate how they have been feeling
 - Oauth authentication
 - Faster performance
 - Prettier modals
+- Port to React Native
 
 ![top of the main page](./screenshots/top.png)
 ![a modal over colorful squares](./screenshots/modal.png)
