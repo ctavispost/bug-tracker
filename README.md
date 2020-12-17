@@ -17,6 +17,7 @@ Clone this repo and run `npm install`
 ## Project planning
 
 [project management](https://github.com/ctavispost/moodpatch/projects/1): a kanban board with user stories and icebox
+
 [visuals](https://www.figma.com/file/Brt6WyouctTzHeTkvnN8TB/colorblog?node-id=0%3A1): wireframes, entity relationship diagrams, and early branding
 
 ## Future improvements
