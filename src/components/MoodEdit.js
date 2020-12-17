@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
-import PostModel from '../models/post';
 
 class MoodEdit extends Component {
-
-    /*handleClick = async (event) => {
-        event.preventDefault();
-        
-        let colorIdStr = null;
-        if(event.target.dataset.value) {
-            colorIdStr = event.target.dataset.value;
-        } else {
-            colorIdStr = event.target.parentElement.dataset.value;
-        };
-        
-        const colorVal = parseInt(colorIdStr);
-        const localUser = parseInt(localStorage.getItem('id'));
-        const currentPost = {
-            colorId: colorVal,
-            userId: localUser
-        };
-        
-        console.log("current post", currentPost);
-        await PostModel.update(currentPost);
-    }*/
 
     render() {
         let showBlock = {display: "none"};
