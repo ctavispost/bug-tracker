@@ -35,10 +35,10 @@ class Home extends Component {
     console.log("AUPs: ", allUserPosts.length);
     for (let p of allPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
-    }
+    };
     for (let p of allUserPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
-    }
+    };
     this.setState({ posts: allPosts, userPosts: allUserPosts });
   }
 

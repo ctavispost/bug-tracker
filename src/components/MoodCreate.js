@@ -52,7 +52,7 @@ class MoodCreate extends Component {
                         </div>
                     </div>
 
-                    <button onClick={this.props.getOut}>x</button>
+                    <button className="waves-effect btn-quiet-two" onClick={this.props.getOut}>X</button>
                 </section>
             </section>
         );    

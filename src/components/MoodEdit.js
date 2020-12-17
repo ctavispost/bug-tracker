@@ -53,10 +53,10 @@ class MoodEdit extends Component {
                         </div>
                     </div>
 
-                    <button onClick={this.props.getOut}>x</button>
+                    <button className="waves-effect btn-quiet-two" onClick={this.props.getOut}>X</button>
                 </section>
                 <div onClick={this.props.getOut} className="just-center">
-                    <button className="marg-bot-sm btn-quiet" onClick={this.props.deletePost}>delete</button>
+                    <button className="marg-bot-sm btn-quiet-two" onClick={this.props.deletePost}>delete</button>
                 </div>
             </section>
         );    
