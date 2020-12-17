@@ -35,5 +35,5 @@ Moodpatch will soon have:
 - Faster performance
 - Prettier modals
 
-![top of the main page](./screenshots/top.png =250x)
-![a modal over colorful squares](./screenshots/modal.png =250x)
+![top of the main page](./screenshots/top.png)
+![a modal over colorful squares](./screenshots/modal.png)
