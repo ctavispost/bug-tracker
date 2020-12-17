@@ -32,3 +32,4 @@ Moodpatch will soon have:
 - Private questionaires people can use to better understand and communicate how they have been feeling
 - Oauth authentication
 - Faster performance
+- Prettier modals
