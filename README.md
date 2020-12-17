@@ -1,6 +1,6 @@
 # moodpatch
 
-Moodpatch is a colorful, mobile-first mood tracking app. People can enter their own moods, edit or delte them, and keep track of them over time. So they know they are not alone, they can also see anonymous moods from other users.
+Moodpatch is a colorful, mobile-first mood tracking app. People can enter their own moods, edit or delete them, and keep track of them over time. So they know they are not alone, they can also see anonymous moods from other users.
 
 This project is intended to run with its [backend](https://github.com/ctavispost/moodPatch_backend).
 
