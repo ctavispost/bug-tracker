@@ -2,8 +2,6 @@
 
 Moodpatch is a colorful, mobile-first mood tracking app. People can enter their own moods and keep track of them over time. So they know they are not alone, they can also see anonymous moods from other users.
 
-![top of the main page](./screenshots/top.png) ![a modal over colorful squares](./screenshots/modal.png)
-
 This project is intended to run with its [backend](https://github.com/ctavispost/moodPatch_backend).
 
 ## Technologies
@@ -36,3 +34,6 @@ Moodpatch will soon have:
 - Oauth authentication
 - Faster performance
 - Prettier modals
+
+![top of the main page](./screenshots/top.png =250x)
+![a modal over colorful squares](./screenshots/modal.png =250x)
