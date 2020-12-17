@@ -5,12 +5,13 @@ Moodpatch is a colorful, mobile-first mood tracking app. People can enter their 
 
 ## Technologies
 
-Postgress
-Node
-Express
-Sequelize
-React
-Materialize CSS
+- Postgress
+- Node
+- Express
+- Sequelize
+- React
+- Materialize CSS
+- CSS
 
 
 ## Installation
