@@ -1,36 +1,6 @@
 import React, { Component } from 'react';
-import PostModel from '../models/post';
 
 class MoodCreate extends Component {
-    constructor(props){
-        super(props);
-        
-        //this.props.handleEdit = this.handleClick.bind(this);
-    }
-
-    /*handleClick = async (event) => {
-        event.preventDefault();
-        //event.persist();
-        
-        let colorIdStr = null;
-        if(event.target.dataset.value) {
-            console.log("true");
-            colorIdStr = event.target.dataset.value;
-        } else {
-            colorIdStr = event.target.parentElement.dataset.value;
-        };
-        
-        const colorVal = parseInt(colorIdStr);
-        const localUser = parseInt(localStorage.getItem('id'));
-        const newPost = {
-            colorId: colorVal,
-            userId: localUser
-        };
-        
-        console.log("new post", newPost);
-        await PostModel.create(newPost);
-    }*/
-
     render() {
         let showBlock = {display: "none"};
 
@@ -82,7 +52,7 @@ class MoodCreate extends Component {
                         </div>
                     </div>
 
-                    <button onClick={this.props.getOut}>x</button>
+                    <button className="waves-effect btn-quiet-two" onClick={this.props.getOut}>X</button>
                 </section>
             </section>
         );    

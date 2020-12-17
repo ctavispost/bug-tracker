@@ -18,11 +18,8 @@ class Home extends Component {
     this.fetchData();
   };
 
-  //memory leak?
   componentDidUpdate(prevProps, prevState) {
-    console.log('Outside if');
     if (prevState.posts !== this.state.posts){
-      console.log('Update');
       this.fetchData();
     }
   }
@@ -32,67 +29,61 @@ class Home extends Component {
     const allPosts = (await PostModel.all()).posts.reverse();
     
     const localUser = parseInt(localStorage.getItem('id'));
-    const allUserPosts = allPosts.filter((post)=>{return post.userId = localUser});
-
+    console.log(localUser);
+    const allUserPosts = allPosts.filter((post)=>{return post.userId === localUser});
+    console.log("posts: ", allPosts.length);
+    console.log("AUPs: ", allUserPosts.length);
     for (let p of allPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
-    }
+    };
     for (let p of allUserPosts) {
       p.colorHex = (await ColorModel.getColor(p.colorId)).color.hex;
-    }
+    };
     this.setState({ posts: allPosts, userPosts: allUserPosts });
   }
 
+  //open new post modal
   handleCreate = (e) => {
     this.setState({ show1: true });
   };
 
+  //edit new post
   handleEdit = async (e) => {
     e.persist();
-    //console.log(e);
+
     let colorIdStr = '';
     if(e.target.dataset.value) {
         colorIdStr = e.target.dataset.value;
     } else {
         colorIdStr = e.target.parentElement.dataset.value;
     };  
-    //console.log(colorIdStr);
+    
     const colorVal = parseInt(colorIdStr);
     const localUser = parseInt(localStorage.getItem('id'));
     const newPost = {
         colorId: colorVal,
         userId: localUser
     };
-    //console.log("new post: ", newPost);
-    //console.log(this.state.posts.length);
-    const res = await PostModel.create(newPost);
-    //console.log(res);
-
-    res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex; 
     
+    const res = await PostModel.create(newPost);
+    res.colorHex = (await ColorModel.getColor(res.colorId)).color.hex; 
     let newPosts = this.state.posts;
     newPosts.unshift(res);
     let newUserPosts = this.state.userPosts;
     newUserPosts.unshift(res);
-    //console.log(newPosts);
-    //console.log(this.state.posts);
       
     this.setState({ posts: newPosts, userPosts: newUserPosts });
-    //this.setState({ show2: true, posts: newPosts, userPosts: newUserPosts });
-    console.log("new length", this.state.posts.length);
-    //console.log(this.state.posts);
-    //console.log(e.target, this.state.postId);
   };
 
+  //open modal to change or delete post
   openColorChange = (e) => {
     e.preventDefault();
     this.setState({ show2: true, postId: parseInt(e.target.value) });
   };
 
+  //change post color
   handleColorChange = async (e) => {
     e.persist();
-    console.log("e: ", e);
-    console.log("test");
     let colorIdStr = e.target.parentElement.dataset.value;
     if(e.target.dataset.value) {
         colorIdStr = e.target.dataset.value;
@@ -101,10 +92,8 @@ class Home extends Component {
     };
 
     const colorVal = parseInt(colorIdStr);
-    console.log(colorVal);
     const localUser = parseInt(localStorage.getItem('id'));
     const postId = this.state.postId;
-    console.log("postId: ", postId);
   
     const currentPost = {
         id: postId,
@@ -112,18 +101,16 @@ class Home extends Component {
         userId: localUser
     };
     const res = await PostModel.update(currentPost);
-    console.log("res", res.post[0]);
     res.colorHex = (await ColorModel.getColor(parseInt(res.post[0]))).color.hex;
-
     this.setState({ postId: '' , userPosts: this.state.userPosts});
   };
 
+  //close modal
   getOut = (event) => {
     this.setState({ show1: false, show2: false});
   };
 
   deletePost = async () => {
-    console.log('destroy!');
     const index = this.state.postId;
     await PostModel.destroy(index);
     this.setState({
@@ -134,20 +121,20 @@ class Home extends Component {
   }
 
   render(){
+    //map userPosts (as buttons)
     const userPostList = this.state.userPosts.map((post, index) => {
       return (
         <PostComp {...post} key={ post.id } truthy={true} openModal={e => this.openColorChange(e)}/>
       );
     });
     
+    //map everybody's posts (as divs)
     const allPostList = this.state.posts.map((post, index) => {
       return (
         <PostComp {...post} key={ post.id }/>
       );
     });
     
-    
-      
     //in case of empty state or while loading
     const noUserPostList = (<p>To save your mood, press the button below.</p>);
 
@@ -168,10 +155,8 @@ class Home extends Component {
 
         <a className="btn-floating btn waves-effect waves-light red modal-trigger add-btn" href="#modal1" onClick={e => this.handleCreate(e)}><i className="material-icons">add</i></a>
 
-        
         <MoodCreate show={this.state.show1} getOut={this.getOut} handleEdit={this.handleEdit}/>
         <MoodEdit show={this.state.show2} postId={this.state.postId} getOut={this.getOut} handleColorChange={this.handleColorChange} deletePost={this.deletePost}/>
-          
       </article>
     )
   }
