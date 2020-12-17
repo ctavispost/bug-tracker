@@ -6,7 +6,7 @@ const Header = (props) => {
   return (
     <header>
       <div className="logo">
-        <Link to={'/'}>Home!</Link>
+        <Link to={'/'}>moodpatch</Link>
       </div>
       <div className="links">
         <ul>
@@ -21,6 +21,7 @@ const Header = (props) => {
               <li><Link to={'/login'}>Login</Link></li>
             </>
           }
+          <li id="top" style={{display: "hidden"}}></li>
         </ul>
       </div>
     </header>

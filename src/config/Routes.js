@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 const Routes = (props) => (
   <Switch>
-    <Route exact path='/' component={ Home } />
+    <Route exact path='/' component={ Home } currentUser={ props.currentUser }/>
     <Route path='/register' component={ Register } />
     <Route path='/login' render={ (routeComponentProps) => {
       return  <Login 
