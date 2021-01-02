@@ -6,8 +6,8 @@ This project is intended to run with its [backend](https://github.com/ctavispost
 
 ## Technologies
 
-- Postgress
-- Node
+- PostgreSQL
+- Node.js
 - Express
 - Sequelize
 - React
